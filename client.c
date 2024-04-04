@@ -49,12 +49,13 @@ int trouverToucheAppuye(int j, int i);					//
 
 int main(int argc, char const *argv[]) {
     //Initialisation du 7 segment grâce à la commande python sinon fonctionne pas
-    system("sudo python3 ../Joy-Pi/segment.py");
+    system("sudo python3 ../../Joy-Pi/segment.py");
     
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
     char *message = "Bonjour serveur, c'est le client !";
     char buffer[1024] = {0};
+    char score[1024] = {0};
     
     // Initialisation des composants nécessaires
     wiringPiSetup(); // setup la librairie wiringPi
@@ -94,7 +95,7 @@ int main(int argc, char const *argv[]) {
 	int i, j, nbTouches = 0;
 	char choixCombinaison[1024];
 	memset(choixCombinaison, 0, sizeof(choixCombinaison)); // Initialisation à une chaîne vide
-	printf("Vous avez 30 secondes pour retaper la combinaison sans faire de fautes, bonne chance !\n");
+	printf("Vous devez retaper la combinaison sans faire de fautes, bonne chance !\n");
     	while (nbTouches<strlen(buffer)) {
 		for (i = 0; i < 3; i++) {
 		    digitalWrite(cols[i], LOW);
@@ -121,7 +122,9 @@ int main(int argc, char const *argv[]) {
 		system("./musiqueDefaite");
 		printf("Mauvaise combinaison, dommage !\n");
 		send(sock , "NOK" , strlen("NOK") , 0 );
-		printf("Merci d'avoir joué et à bientot !\n");
+		//Reception du score
+		valread = read( sock , score, 1024);
+		printf("Merci d'avoir joué, vous avez un score de [%spts]. A bientot !\n",score);
 		close(sock);
     		printf("Connexion avec le serveur terminée.\n");
     		return 0;
