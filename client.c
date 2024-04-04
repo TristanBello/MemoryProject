@@ -4,7 +4,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-
+j
 #include <wiringPiI2C.h>
 #include <time.h>
 #include <wiringPi.h>
