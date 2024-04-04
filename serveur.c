@@ -16,8 +16,7 @@ void *handle_client(void *arg) {
     char *debutPartie = "La partie débute dans 5 secondes !";
     char *scoreJoueur = "Votre score : ";
     char buffer[1024] = {0};
-    int valread;
-    int nb, i;
+    int valread, nb, i;
     int score = 0;
     char aux[1];
     char scoreJ[3];
@@ -26,26 +25,16 @@ void *handle_client(void *arg) {
     
     
     //Génération d'une cominaison aléatoire
-    //for(i=0; i < 2; i++) {
-        srand(time(NULL));
-        nb = rand()%9999+1111;
-        printf("%d", nb);
-        sprintf(aux, "%d", nb); // Convertit l'entier en une chaîne
-        strcat(combinaison, aux);
-        usleep(200000);
-    //}
+    srand(time(NULL));
+    nb = rand()%99999+11111;
+    printf("%d", nb);
+    sprintf(aux, "%d", nb); // Convertit l'entier en une chaîne
+    strcat(combinaison, aux);
+    usleep(200000);
     
-    // Nous entrons des valeurs à la main car la fonction rand met le même chiffre à la suite
-    /*strcat(combinaison, "1");
-    strcat(combinaison, "6");
-    strcat(combinaison, "2");
-    strcat(combinaison, "5");
-    strcat(combinaison, "8");
-    * */
     
     // Envoyer un message initial au client
     printf("Nouveau joueur connecté.\n");
-    //printf("[ Joueur %d ] : %s\n", id, buffer);
     
     printf("[ Joueur %d ] : La partie débute dans 5 secondes !\n", id);
     printf("[ Joueur %d ] : Nouvelle combinaison : %s\n", id, combinaison);
@@ -56,11 +45,9 @@ void *handle_client(void *arg) {
         send(client_socket, combinaison, strlen(combinaison), 0);
 
         // Gestion de la communication avec le client
-        //while ((valread = read(client_socket, buffer, 1024)) > 0) {
         valread = read(client_socket, buffer, 1024);
             
         printf("[ Joueur %d ] : Résultat %s\n", idJoueur, buffer);
-        //}
         
         //Le joueur s'est trompé de combinaison
         if(strcmp(buffer, "NOK") == 0) {
@@ -126,7 +113,7 @@ int main() {
     }
 
     // Écoute de nouvelles connexions
-    if (listen(server_fd, 1) < 0) {
+    if (listen(server_fd, 3) < 0) {
         perror("listen");
         exit(EXIT_FAILURE);
     }
