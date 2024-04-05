@@ -49,7 +49,7 @@ int trouverToucheAppuye(int j, int i);					//
 
 int main(int argc, char const *argv[]) {
     //Initialisation du 7 segment grâce à la commande python sinon fonctionne pas
-    system("sudo python3 ../../Joy-Pi/segment.py");
+    system("sudo python3 ../Joy-Pi/segment.py");
     
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[]) {
     serv_addr.sin_port = htons(PORT);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if(inet_pton(AF_INET, "192.168.97.14", &serv_addr.sin_addr)<=0) {
+    if(inet_pton(AF_INET, "192.168.74.14", &serv_addr.sin_addr)<=0) {
         printf("\nInvalid address/ Address not supported \n");
         return -1;
     }
