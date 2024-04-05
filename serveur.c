@@ -26,11 +26,15 @@ void *handle_client(void *arg) {
     
     //Génération d'une cominaison aléatoire
     srand(time(NULL));
-    nb = rand()%99999+11111;
-    printf("%d", nb);
+    nb = rand() % 90000 + 10000;
     sprintf(aux, "%d", nb); // Convertit l'entier en une chaîne
     strcat(combinaison, aux);
     usleep(200000);
+    
+    //On ne veut pas de 0 dans la combinaison
+    for(int k=0; k<strlen(combinaison); k++){
+        if(combinaison[k] == '0') combinaison[k] = '1';
+    }
     
     
     // Envoyer un message initial au client
