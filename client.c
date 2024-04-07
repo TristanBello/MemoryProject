@@ -197,7 +197,7 @@ void initMatriceBtn() {
 
 // Fonction qui trouve la touche qui a été appuyée
 int trouverToucheAppuye(int j, int i) {
-    int key = j * 3 + i + 1; // Calculate the key number based on row and column
+    int key = j * 3 + i + 1; // Calcule en fonction des lignes et colonnes
     //printf("Touche %d\n", key);
     return key;
 }
